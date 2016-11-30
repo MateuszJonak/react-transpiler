@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import AlertComponent from './components/alert.component';
+import CodeComponent from './components/code.component';
+import ResultComponent from './components/result.component';
 
 class App extends Component {
   constructor() {
@@ -26,26 +29,13 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        { this.state.error.length > 0 ? <header className="alert alert-danger">{this.state.error}</header> : null}
+        <AlertComponent error={this.state.error} />
         <div className="row">
-          <div className="col-xs-3">
-            <div className="form-group">
-              <div className="card card-block">
-                <h3 className="card-title">Code</h3>
-                <textarea
-                  className="form-control"
-                  onChange={this.update.bind(this)}
-                  defaultValue={this.state.input}/>
-              </div>
-            </div>
+          <div className="col-xs-4">
+            <CodeComponent update={this.update.bind(this)} input={this.state.input} />
           </div>
-          <div className="col-xs-9">
-            <div className="card card-block">
-              <h3 className="card-title">Result</h3>
-              <pre className="card-text">
-                {this.state.output}
-              </pre>
-            </div>
+          <div className="col-xs-8">
+            <ResultComponent output={this.state.output}/>
           </div>
         </div>
       </div>
